@@ -44,6 +44,11 @@ class BookmarkDao:
         #print(bookmark_list[0])
         return bookmark_list
 
+    def table_select_highest_id(self) -> int:
+        self.cur.execute("SELECT bid FROM bookmarks ORDER BY bid DESC LIMIT 1")
+        max_id = self.cur.fetchall()
+        return int(max_id[0][0])
+
 
 # Testing DB entries
 
