@@ -37,6 +37,22 @@ class Caretaker:
             self.bookmark_list.remove(bookmark)
             self.dao.delete_bookmark(bookmark)
 
+    def edit_bookmark(self, bookmark, type, value):
+        """This Dictionary works like a switch case statement - in case of type 1 (the key of the dictionary)
+        it calls the value, which is the specific editing method for the bookmark - the value will be the parameter
+        after calling the edit function the DAO will be invoked to update the db"""
+        mapping = {1: bookmark.edit_title, 2: bookmark.edit_comment, 3: bookmark.edit_url, 4: bookmark.edit_image}
+        mapping[type](value)
+        self.dao.update_from_db(bookmark)
+
+    def add_tag(self, bookmark, tag: str):
+        bookmark.add_tag(tag)
+        self.dao.update_from_db(bookmark)
+
+    def delete_tag(self, bookmark, tag: str):
+        bookmark.delete_tag(tag)
+        self.dao.update_from_db(bookmark)
+
     def get_list(self):
         """this method is called at the startup of the program to create a List of Bookmarks from the DB via DAO"""
         self.bookmark_list = self.dao.get_list()

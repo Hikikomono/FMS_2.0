@@ -7,7 +7,7 @@
 
    This class is used for creating new Bookmarks
    with all their properties like title, url, comments
-   and so on. Bookmark are saved in the Bookmarks List
+   and so on. Bookmarks are saved in the Bookmarks List
    the Caretaker Class takes care of.
 """
 
@@ -37,13 +37,25 @@ class Bookmark:
         if image is not None:
             self.image = image
 
+    def edit_title(self, newtitle: str):
+        self.title = newtitle
+
+    def edit_comment(self, newcomment: str):
+        self.comment = newcomment
+
+    def edit_url(self, newurl: str):
+        self.url = newurl
+
+    def edit_image(self, newimage):
+        self.image = newimage
 
     def add_tag(self, tag: str):
         """adds a tag to a bookmark"""
         self.tags.append(tag)
 
-
     def delete_tag(self, tag: str):
         """removes a tag from a bookmark"""
         if tag in self.tags:
             self.tags.remove(tag)
+
+
