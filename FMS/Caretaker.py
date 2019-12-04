@@ -30,6 +30,7 @@ class Caretaker:
         """this method is called to create a new bookmark locally, and send it directly to the db via DAO"""
         self.bookmark_list.append(Bookmark(id, title, url, comment, image, tags))
         self.dao.add_bookmark(self.bookmark_list[-1])  # -1 spricht immer das letzte Element einer Liste an
+        self.bookmark_list[-1].id = self.dao.table_select_highest_id()
 
     def delete_bookmark(self, bookmark):
         """this method is called to remove a bookmark locally, and also at the db via DAO"""

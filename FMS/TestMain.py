@@ -19,4 +19,6 @@ carer.add_bookmark(None, "My second entry", "www.sex.lulu", "my comment222", Non
 # for elements in carer.bookmark_list:
 #    print(elements.id)
 
-carer.edit_bookmark(carer.bookmark_list[0], "a", "tralala")
+print(carer.bookmark_list[-1].id)
+
+

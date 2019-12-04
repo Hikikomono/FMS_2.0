@@ -24,18 +24,6 @@ class Bookmark:
         self.image = image
         self.tags = tags
 
-    def edit_bookmark(self, title: str = None, comment: str = None, url: str = None, image=None):
-        """edits a bookmarks title, comment, url or image
-        by default its none so only elements that are provided
-        are changed"""
-        if title is not None:
-            self.title = title
-        if comment is not None:
-            self.comment = comment
-        if url is not None:
-            self.url = url
-        if image is not None:
-            self.image = image
 
     def edit_title(self, newtitle: str):
         self.title = newtitle
