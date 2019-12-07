@@ -1,5 +1,4 @@
 '''
-get_list() : List
 search_bookmark(String) : Bookmark ---> so far not needed -> search is performed in the fetched bookmark list
 '''
 import sqlite3
@@ -24,8 +23,17 @@ class BookmarkDao:
             self.cur.execute("INSERT OR IGNORE INTO tags VALUES (?, ?)", (None, tag))
         self.conn.commit()
 
+        # fill linkingTable
+        bid = self.table_select_highest_id()
+        for tag in bookmark.tags:
+            self.cur.execute("SELECT tid FROM tags WHERE tag_name = ?", [tag])
+            tid = self.cur.fetchone()
+            self.cur.execute("INSERT INTO linkingTable VALUES (?,?,?)", (None, bid, tid[0]))
+        self.conn.commit()
+
     def delete_bookmark(self, bookmark: Bookmark) -> None:
-        self.cur.execute("DELETE FROM bookmarks WHERE bid = ?", [bookmark.bid])  #
+        self.cur.execute("DELETE FROM bookmarks WHERE bid = ?", [bookmark.id])  #
+        self.cur.execute("DELETE FROM linkingTable WHERE bid = ?", [bookmark.id])
         self.conn.commit()
 
     def update_from_db(self, bookmark: Bookmark) -> None:
@@ -41,20 +49,23 @@ class BookmarkDao:
         for row in db_list:
             bookmark_list.append(Bookmark(row[0], row[1], row[2], row[3], row[4]))
 
-        #print(bookmark_list[0])
+        # print(bookmark_list[0])
         return bookmark_list
 
-    def table_select_highest_id(self) -> int:
-        self.cur.execute("SELECT bid FROM bookmarks ORDER BY bid DESC LIMIT 1")
-        max_id = self.cur.fetchall()
-        return int(max_id[0][0])
+    def table_select_highest_id(self) -> int:   #rename to get_highest_id()
+        self.cur.execute("SELECT MAX(bid) FROM bookmarks")
+        max_id = self.cur.fetchone()
+        return int(max_id[0])
+
 
 
 # Testing DB entries
 
-# bookmarkDao = BookmarkDao()
+#bookmarkDao = BookmarkDao()
 # tag_list_1 = ["tag_1", "tag_2"]
 # tag_list_2 = ["tag_3337", "tag_4337"]
+
+#print(bookmarkDao.table_select_highest_id())
 #
 # bookmark_1 = Bookmark("title_1337", "comment_2337", "URL_1337", "", tag_list_1)
 # bookmark_2 = Bookmark("title_2", "comment_2", "URL_2", "", tag_list_2)
