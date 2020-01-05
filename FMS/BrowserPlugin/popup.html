@@ -5,15 +5,58 @@
     <style>
         body {
             width: 350px;
+            border: 5px solid #86BAA1;
+            border-radius: 6px;
+            margin: 0px;
+            padding: 0px;
+            background-color: #A0E8AF;
+
+        }
+        button {
+            background-color: #005944; /* Green */
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            margin: 8px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 15px;
+            -webkit-transition-duration: 0.4s; /* Safari */
+            transition-duration: 0.4s;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #DAF7DC; /* Green */
+            color: #005944;
+            border: 2px solid #005944;
         }
 
         h1 {
-            align: center;
+            color: #005944;
+            text-align: center;
+            letter-spacing: 3px;
         }
 
         #timeoutAlert{
             color: #ffffff;
             transition: color 2s ease 0s;
+        }
+
+        .inputfield{
+            width: 95%;
+            padding: 12px 20px;
+            margin: 8px;
+            box-sizing: border-box;
+            border-radius: 6px;
+            background-color: #DAF7DC;
+            color: #005944;
+            border: 2px solid #9EE493;
+        }
+        .inputfield:focus{
+            background-color: whitesmoke;
+            border: 2px solid #005944;
+            outline: none;
         }
     </style>
 </head>
@@ -25,6 +68,7 @@
 <input id="inputTitle" placeholder="Bookmark title..." class="inputfield"/>
 <input id="inputTag" placeholder="girls,cats,... [no spaces allowed]" class="inputfield"/>
 <input id="inputComment" placeholder="some description for your Bookmark..." class="inputfield"/>
+<br>
 <button id="saveBtn">save</button>
 <button id="syncSaves">sync</button>
 <button id="remove">remove data</button>

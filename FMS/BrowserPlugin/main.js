@@ -1,7 +1,10 @@
 //Array for Bookmarks if already exists in chrome storage it should be reloaded
 let bookmarkArray = new Array();
 chrome.storage.sync.get(['array'],function(result){
-    bookmarkArray = result.array;
+
+    if(result.array!==undefined){
+        bookmarkArray = result.array
+    }
 });
 
 //now the query to get the url of active tab into the input field
@@ -22,7 +25,7 @@ saveBtn.addEventListener("click", addToArray);
 //syncbutton function (getting a csv out of the array)
 syncBtn.addEventListener("click",getCSV);
 
-
+//TODO: this needs to be coded to activate when chrome is closed, together with a final save to CSV
 //for dev purpose only
 let removeBtn = document.getElementById("remove");
 removeBtn.addEventListener("click",removeData);
@@ -41,7 +44,7 @@ function displayInfo(message){
     }, 2000);
 }
 
-//TODO: check if its persistent now, make a get of storage with every start of the extension, then check if its really persisted
+
 function addToArray() {
     //function adds inserted Data to an array that can be converted to .csv later
     let url = document.getElementById("inputUrl").value;
@@ -51,10 +54,12 @@ function addToArray() {
 
     bookmarkArray.push([url,title,tag,comment]);
 
+    //chrome storage tauscht das ganze array das persistiert ist gegen das neue aus
     chrome.storage.sync.set({'array': bookmarkArray}, function () {
-    //message that it worked
-        alert("success!");
+    //message that it worked, but callback could also be avoided
+        //alert("success!");
         console.log("added bookmarkArray to storage")
+        displayInfo("...bookmark added")
     });
 
 
@@ -65,7 +70,17 @@ function addToArray() {
 function getCSV(){
     //function saves .csv file of the Bookmarks array on local HD for sync with standalone Python
 
-    alert(bookmarkArray[3]);
+    //alert(bookmarkArray[0]+bookmarkArray[1]+bookmarkArray[2]);
+    let csvContent = "data:text/csv;charset=utf-8,";
+    bookmarkArray.forEach(function (rowArray) {
+        let row = rowArray.join(";");
+        csvContent += row + "\r\n";
+
+    });
+
+    //code for downloading the created file
+    var encodeUri = encodeURI(csvContent);
+    window.open(encodeUri);
 
 
     displayInfo("...bookmarks synced");
