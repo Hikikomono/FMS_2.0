@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Find my Stuff</title>
+    <style>
+        body {
+            width: 350px;
+        }
+
+        h1 {
+            align: center;
+        }
+
+        #timeoutAlert{
+            color: #ffffff;
+            transition: color 2s ease 0s;
+        }
+    </style>
+</head>
+<body>
+<h1>Find my Stuff</h1>
+
+
+<input id="inputUrl" class="inputfield"/>
+<input id="inputTitle" placeholder="Bookmark title..." class="inputfield"/>
+<input id="inputTag" placeholder="girls,cats,... [no spaces allowed]" class="inputfield"/>
+<input id="inputComment" placeholder="some description for your Bookmark..." class="inputfield"/>
+<button id="saveBtn">save</button>
+<button id="syncSaves">sync</button>
+
+<!--triggers only when saved-->
+<div id='timeoutAlert'></div>
+
+<script src="main.js"></script>
+</body>
+</html>
