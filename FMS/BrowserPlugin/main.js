@@ -1,20 +1,35 @@
-//Array for Bookmarks
+//Array for Bookmarks if already exists in chrome storage it should be reloaded
 let bookmarkArray = new Array();
+chrome.storage.sync.get(['array'],function(result){
+    bookmarkArray = result.array;
+});
 
-//now the query to get the url of active tab
+//now the query to get the url of active tab into the input field
 let field = document.getElementById("inputUrl");
 chrome.tabs.query({'active': true, 'lastFocusedWindow': true}, function (tabs) {
     var url = tabs[0].url;
     field.value = url;
 });
 
+//bind butons to variables
 let saveBtn = document.getElementById("saveBtn");
 let syncBtn = document.getElementById("syncSaves");
+
+
 
 //savebutton function (inserting new Bookmarks to array)
 saveBtn.addEventListener("click", addToArray);
 //syncbutton function (getting a csv out of the array)
 syncBtn.addEventListener("click",getCSV);
+
+
+//for dev purpose only
+let removeBtn = document.getElementById("remove");
+removeBtn.addEventListener("click",removeData);
+function removeData() {
+    //removes all data from storage (achtung lokal ist es da bis restart logischerweise)
+chrome.storage.sync.clear();
+}
 
 function displayInfo(message){
     //next function let a message appear for some seconds (together with css)
@@ -38,6 +53,8 @@ function addToArray() {
 
     chrome.storage.sync.set({'array': bookmarkArray}, function () {
     //message that it worked
+        alert("success!");
+        console.log("added bookmarkArray to storage")
     });
 
 
@@ -48,7 +65,7 @@ function addToArray() {
 function getCSV(){
     //function saves .csv file of the Bookmarks array on local HD for sync with standalone Python
 
-    window.alert(bookmarkArray[3]);
+    alert(bookmarkArray[3]);
 
 
     displayInfo("...bookmarks synced");
