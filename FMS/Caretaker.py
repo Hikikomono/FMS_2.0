@@ -2,7 +2,7 @@
     File name: Caretaker.py
     Author: Faelb (faelb@gmx.at)
     Date created: 12/03/2019
-    Date last modified: 12/03/2019
+    Date last modified: 06/01/2020
     Python Version: 3.8
 
    This class keeps hold of the Bookmark List
@@ -14,8 +14,9 @@
    to update every change of the List to the
    Database
 """
-from FMS.Bookmark import Bookmark
-from FMS.BookmarkDao import BookmarkDao
+from Bookmark import Bookmark
+from BookmarkDao import BookmarkDao
+#from Parser import Parser
 
 
 class Caretaker:
@@ -23,7 +24,8 @@ class Caretaker:
     def __init__(self):
         self.bookmark_list = []
         self.dao = BookmarkDao()
-        # make a singleton here
+        #self.parser = Parser()
+        # make a singleton here (dao + parser)
 
     def add_bookmark(self, id: int = None, title: str = None, url: str = None, comment: str = None, image=None,
                      tags: list = None):
@@ -55,5 +57,7 @@ class Caretaker:
         self.dao.update_from_db(bookmark)
 
     def get_list(self):
-        """this method is called at the startup of the program to create a List of Bookmarks from the DB via DAO"""
+        """this method is called at the startup of the program to create a List of Bookmarks from the DB via DAO", also
+        it calls the parser to search for files with bookmarks from the Browserplugin"""
         self.bookmark_list = self.dao.get_list()
+        #self.parser.get_bookmarks()

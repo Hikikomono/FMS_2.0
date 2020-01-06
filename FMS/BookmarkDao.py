@@ -2,7 +2,7 @@
 search_bookmark(String) : Bookmark ---> so far not needed -> search is performed in the fetched bookmark list
 '''
 import sqlite3
-from FMS.Bookmark import Bookmark  # from folder_name.file_name import class_name
+from Bookmark import Bookmark  # from folder_name.file_name import class_name
 
 
 class BookmarkDao:
