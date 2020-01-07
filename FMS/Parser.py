@@ -6,7 +6,7 @@
     Python Version: 3.6
 
     This class shall get the download file of the chrome extension
-    load the csv data and turn it into bookmark objects
+    load the csv data and turn it into bookmark objects, windows & linux compatible
 """
 
 import Caretaker
@@ -41,6 +41,7 @@ class Parser:
                         print(f'\t{row[0]} <-URL {row[1]} <-Title {row[2]} <-tags {row[3]} <-comment')
                         line_count += 1
                     print(f'Processed {line_count} lines.')
+                    csv_file.close()
                     os.remove(linuxpath)
             else:
                 print("no file from plugin found")
@@ -56,6 +57,7 @@ class Parser:
                         print(f'\t{row[0]} <-URL {row[1]} <-Title {row[2]} <-tags {row[3]} <-comment')
                         line_count += 1
                     print(f'Processed {line_count} lines.')
+                    csv_file.close()
                     os.remove(winpath)
             else:
                 print("no file from plugin found")
