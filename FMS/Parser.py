@@ -2,7 +2,7 @@
     File name: Bookmark.py
     Author: Faelb (faelb@gmx.at)
     Date created: 06/01/2020
-    Date last modified: 06/01/2020
+    Date last modified: 07/01/2020
     Python Version: 3.6
 
     This class shall get the download file of the chrome extension

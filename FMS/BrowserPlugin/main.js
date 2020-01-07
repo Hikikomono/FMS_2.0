@@ -8,10 +8,17 @@ chrome.storage.sync.get(['array'],function(result){
 });
 
 //now the query to get the url of active tab into the input field
-let field = document.getElementById("inputUrl");
+let urlfield = document.getElementById("inputUrl");
 chrome.tabs.query({'active': true, 'lastFocusedWindow': true}, function (tabs) {
     var url = tabs[0].url;
-    field.value = url;
+    urlfield.value = url;
+});
+
+let titlefield = document.getElementById("inputTitle");
+chrome.tabs.query({'active': true, 'lastFocusedWindow': true}, function (tabs) {
+    var title = tabs[0].title;
+    titlefield.value = title;
+
 });
 
 //bind butons to variables
@@ -62,6 +69,10 @@ function addToArray() {
         displayInfo("...bookmark added")
     });
 
+    document.getElementById("inputTitle").value="";
+    document.getElementById("inputTag").value="";
+    document.getElementById("inputComment").value="";
+
 
 
     //window.alert("saved Bookmark");
@@ -82,6 +93,8 @@ function getCSV(){
     var encodeUri = encodeURI(csvContent);
     window.open(encodeUri);
 
+    //remove chrome storage, because now we got the file
 
+    removeData();
     displayInfo("...bookmarks synced");
 }

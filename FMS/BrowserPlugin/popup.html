@@ -25,11 +25,13 @@
             -webkit-transition-duration: 0.4s; /* Safari */
             transition-duration: 0.4s;
             border-radius: 5px;
+            font-weight: bold;
         }
         button:hover {
             background-color: #DAF7DC; /* Green */
             color: #005944;
             border: 2px solid #005944;
+            font-weight: bold;
         }
 
         h1 {
@@ -41,6 +43,11 @@
         #timeoutAlert{
             color: #ffffff;
             transition: color 2s ease 0s;
+            text-align: center;
+            letter-spacing: 3px;
+            font-weight: bold;
+
+
         }
 
         .inputfield{
@@ -52,22 +59,25 @@
             background-color: #DAF7DC;
             color: #005944;
             border: 2px solid #9EE493;
+            font-weight: bold;
         }
         .inputfield:focus{
             background-color: whitesmoke;
             border: 2px solid #005944;
             outline: none;
+
         }
+
     </style>
 </head>
 <body>
 <h1>Find my Stuff</h1>
 
 
-<input id="inputUrl" class="inputfield"/>
-<input id="inputTitle" placeholder="Bookmark title..." class="inputfield"/>
-<input id="inputTag" placeholder="girls,cats,... [no spaces allowed]" class="inputfield"/>
-<input id="inputComment" placeholder="some description for your Bookmark..." class="inputfield"/>
+<input id="inputUrl" class="inputfield" onfocus="this.value=''">
+<input id="inputTitle" onfocus="this.value=''" class="inputfield">
+<input id="inputTag" placeholder="girls,cats,... [no spaces allowed]" class="inputfield">
+<input id="inputComment" placeholder="some description for your Bookmark..." class="inputfield">
 <br>
 <button id="saveBtn">save</button>
 <button id="syncSaves">sync</button>
