@@ -2,12 +2,11 @@ import sys
 from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
 from PyQt5.QtCore import *
-from ContentBox import ContentBox
 import qdarkstyle
 import qdarkgraystyle
 
 
-class MainGUI(QWidget):
+class MainGui(QWidget):
     def __init__(self):
         super().__init__()
         #todo remove stylesheet position (read)
@@ -77,7 +76,7 @@ class MainGUI(QWidget):
         #todo test section #remove
 
 
-class PopupAddBookmark(QWidget):
+class AddBookmarkGui(QWidget):
     def __init__(self):
         super().__init__()
 
@@ -148,7 +147,7 @@ class PopupAddBookmark(QWidget):
 # # start app
 # app = QApplication(sys.argv)
 # #app.setStyleSheet(qdarkgraystyle.load_stylesheet())
-# window = GUI()
+# window = gui()
 # window.show()
 # app.exec_()
 

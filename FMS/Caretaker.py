@@ -6,7 +6,7 @@
     Python Version: 3.8
 
    This class keeps hold of the Bookmark List
-   which is used by the GUI to handle all
+   which is used by the gui to handle all
    Bookmark interactions like create, delete and also
    the initial ListLoad from the DAO
 

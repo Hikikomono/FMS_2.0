@@ -3,12 +3,12 @@ from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
 from PyQt5.QtCore import *
 
-from ContentBox import ContentBox
-from GUI import MainGUI
-from GUI import PopupAddBookmark
+from gui.content_box import ContentBox
+from gui.gui_raw import MainGui
+from gui.gui_raw import AddBookmarkGui
 
 
-class MainView(MainGUI):
+class MainView(MainGui):
     def __init__(self):
         super().__init__()
 
@@ -23,8 +23,8 @@ class MainView(MainGUI):
 
     def tag_clicked(self, item):
         """
-        when a tag in the "tag_list" (GUI) is clicked, this method gets called which inserts the clicked item
-        into the "search_bar" (GUI)
+        when a tag in the "tag_list" (gui) is clicked, this method gets called which inserts the clicked item
+        into the "search_bar" (gui)
         """
         if self.search_bar.text().__len__() == 0:
             self.search_bar_content = ""
@@ -60,7 +60,7 @@ class MainView(MainGUI):
 
     def add_list_item(self, title: str, url: str, tags: list):
         """
-        adds a spacer item, so that added Bookmarks / ContentBox are always at the top of the window
+        adds a spacer item, so that added Bookmarks / content_box.py are always at the top of the window
         spacer_queue keeps care that only the most recent added Bookmark / Contentbox has a spacer underneath it
         """
         print(self.spacer_queue.__len__())
@@ -72,15 +72,15 @@ class MainView(MainGUI):
         self.spacer_queue.append(QSpacerItem(1, 1, QSizePolicy.Minimum, QSizePolicy.Expanding))
         self.scroll_layout.addSpacerItem(self.spacer_queue[0])
 
-    # def add_list_item_2(self, list_item: ContentBox):
+    # def add_list_item_2(self, list_item: content_box.py):
     #     self.scroll_layout.addWidget(list_item)
 
     def remove_list_item(self, list_item: ContentBox):  #TODO implement functionality
         self.scroll_layout.removeWidget(list_item)
 
 
-class PopupView(PopupAddBookmark):
-    def __init__(self, parent: MainGUI):
+class PopupView(AddBookmarkGui):
+    def __init__(self, parent: MainGui):
         super().__init__()
         self.parent = parent
 
@@ -93,12 +93,12 @@ class PopupView(PopupAddBookmark):
 
     def get_input(self):
         """
-        gets entered variales and passes them to "add_list_item" whichs adds a new ContentBox object / item to
-        the main window (GUI). If "title"-length < 2 or "url"-length < 5 and the "Add" button on the popup
+        gets entered variales and passes them to "add_list_item" whichs adds a new content_box.py object / item to
+        the main window (gui). If "title"-length < 2 or "url"-length < 5 and the "Add" button on the popup
         is pressed, then no new item is added, the popup just closes
 
         splits the tags (seperated with " ") into seperate strings -> returns a list which gets passed to
-        "add_tags" (GUI) method
+        "add_tags" (gui) method
         """
         if not(self.title_input.text().__len__() < 2 or self.url_input.text().__len__() < 5):
             self.parent.add_list_item(self.title_input.text(), self.url_input.text(), self.tags_input.text())
