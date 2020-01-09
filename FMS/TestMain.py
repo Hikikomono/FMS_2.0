@@ -10,8 +10,10 @@ db = DbController()
 db.init_tables()
 
 app = QApplication(sys.argv)
-gui = MainView()
-gui.show()
+window = MainView()
+window.init_gui()
+window.show()
+app.exec_()
 
 
 

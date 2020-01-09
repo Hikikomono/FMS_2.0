@@ -54,13 +54,9 @@ class MainView(MainGui):
         """
         calls "add_tags()" and "add_list_item() when program launches to init everything thats in DB"
         """
-        print("0")
-        self.popup = PopupView(self)
-        print("1")
         self.caretaker.get_list()
-        print("2")
         self.parser.get_bookmarks()
-        print("3")
+        self.popup = PopupView(self)
         self.popup.init_content(self.caretaker.bookmark_list)
 
 
@@ -105,9 +101,6 @@ class MainView(MainGui):
         self.spacer_queue.append(QSpacerItem(1, 1, QSizePolicy.Minimum, QSizePolicy.Expanding))
         self.scroll_layout.addSpacerItem(self.spacer_queue[0])
 
-    # def add_list_item_2(self, list_item: content_box.py):
-    #     self.scroll_layout.addWidget(list_item)
-
     def remove_list_item(self, list_item: ContentBox):  #TODO implement functionality
         self.scroll_layout.removeWidget(list_item)
 
@@ -148,25 +141,19 @@ class PopupView(AddBookmarkGui):
         self.close()
 
     def init_content(self, bookmarks: list):
-        print(bookmarks[0].tags)
-        print("in init")
         for bookmark in bookmarks:
-            # if bookmark.tags is None:
-            #     bookmark.tags = []
             print(bookmark.tags)
             self.parent.init_list_item(bookmark)
-            print("before add_tags")
             self.parent.add_tags(bookmark.tags)
-        print("init end")
 
 
-db = DbController()
-db.init_tables()
-
-app = QApplication(sys.argv)
-window = MainView()
-window.init_gui()
-window.show()
-app.exec_()
+# db = DbController()
+# db.init_tables()
+#
+# app = QApplication(sys.argv)
+# window = MainView()
+# window.init_gui()
+# window.show()
+# app.exec_()
 
 

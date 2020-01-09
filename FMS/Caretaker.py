@@ -60,5 +60,5 @@ class Caretaker:
         """this method is called at the startup of the program to create a List of Bookmarks from the DB via DAO", also
         it calls the parser to search for files with bookmarks from the Browserplugin"""
         self.bookmark_list = self.dao.get_list()
-        print(self.bookmark_list[0].tags)
+        #print(self.bookmark_list[0].tags)
         #self.parser.get_bookmarks()

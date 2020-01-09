@@ -9,9 +9,9 @@ class MainGui(QWidget):
         super().__init__()
         #todo remove stylesheet position (read)
 
-        sshFile = "style.qss"
-        with open(sshFile, "r") as fh:
-            self.setStyleSheet(fh.read())
+        # sshFile = "style.qss"
+        # with open(sshFile, "r") as fh:
+        #     self.setStyleSheet(fh.read())
 
         self.win_layout = QVBoxLayout()
         self.setLayout(self.win_layout)
@@ -31,6 +31,10 @@ class MainGui(QWidget):
         self.searchbar_content = ""
         #self.search_bar.placeholderText("pyqt python (separate tags with Spaces)") #TODO how to "placeholder text"?
 
+        self.search_button = QPushButton("Lupe") #TODO lupen icon einfügen
+        self.search_button.setFixedWidth(40)
+        self.search_button.setFocusPolicy(Qt.NoFocus)
+
         self.add_button = QPushButton("+")
         self.add_button.setFixedWidth(40)
         self.add_button.setFocusPolicy(Qt.NoFocus)
@@ -40,6 +44,7 @@ class MainGui(QWidget):
         self.sync_button.setFocusPolicy(Qt.NoFocus)
 
         self.navigation_layout.addWidget(self.search_bar)
+        self.navigation_layout.addWidget(self.search_button)
         self.navigation_layout.addWidget(self.add_button)
         self.navigation_layout.addWidget(self.sync_button)
         self.navigation_layout.setContentsMargins(10,10,10,0)
@@ -79,9 +84,9 @@ class AddBookmarkGui(QWidget):
         super().__init__()
 
         #todo remove
-        sshFile = "style.qss"
-        with open(sshFile, "r") as fh:
-             self.setStyleSheet(fh.read())
+        # sshFile = "style.qss"
+        # with open(sshFile, "r") as fh:
+        #      self.setStyleSheet(fh.read())
 
         self.main_layout = QVBoxLayout(self)
         self.setLayout(self.main_layout)
