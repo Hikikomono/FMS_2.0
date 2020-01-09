@@ -198,3 +198,31 @@ dmypy.json
 # End of https://www.gitignore.io/api/python,pycharm
 
 .idea/
+
+FMS/fms.db
+
+FMS/venv/bin/activate
+
+FMS/venv/bin/activate.csh
+
+FMS/venv/bin/activate.fish
+
+FMS/venv/bin/Activate.ps1
+
+FMS/venv/bin/easy_install
+
+FMS/venv/bin/easy_install-3.8
+
+FMS/venv/bin/pip
+
+FMS/venv/bin/pip3
+
+FMS/venv/bin/pip3.8
+
+FMS/venv/bin/python
+
+FMS/venv/bin/python3
+
+FMS/venv/bin/python3.8
+
+FMS/venv/pyvenv.cfg

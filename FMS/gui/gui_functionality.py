@@ -6,11 +6,18 @@ from PyQt5.QtCore import *
 from gui.content_box import ContentBox
 from gui.gui_raw import MainGui
 from gui.gui_raw import AddBookmarkGui
+from Caretaker import Caretaker
+from Parser import Parser
+
+
 
 
 class MainView(MainGui):
     def __init__(self):
         super().__init__()
+
+        self.caretaker = Caretaker()
+        self.parser = Parser()
 
         self.spacer_queue = []
         self.search_bar_content = ""
