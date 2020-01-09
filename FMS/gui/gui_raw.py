@@ -9,9 +9,9 @@ class MainGui(QWidget):
         super().__init__()
         #todo remove stylesheet position (read)
 
-        # sshFile = "style.qss"
-        # with open(sshFile, "r") as fh:
-        #     self.setStyleSheet(fh.read())
+        sshFile = "style.qss"
+        with open(sshFile, "r") as fh:
+            self.setStyleSheet(fh.read())
 
         self.win_layout = QVBoxLayout()
         self.setLayout(self.win_layout)
@@ -84,9 +84,9 @@ class AddBookmarkGui(QWidget):
         super().__init__()
 
         #todo remove
-        # sshFile = "style.qss"
-        # with open(sshFile, "r") as fh:
-        #      self.setStyleSheet(fh.read())
+        sshFile = "style.qss"
+        with open(sshFile, "r") as fh:
+             self.setStyleSheet(fh.read())
 
         self.main_layout = QVBoxLayout(self)
         self.setLayout(self.main_layout)
@@ -113,10 +113,17 @@ class AddBookmarkGui(QWidget):
         self.url_widget = QWidget()
         self.url_layout = QHBoxLayout()
         self.url_input = QLineEdit()
-
         self.url_widget.setLayout(self.url_layout)
         self.url_layout.addWidget(QLabel("URL: "))
         self.url_layout.addWidget(self.url_input)
+
+        #comment inüut
+        self.comment_widget = QWidget()
+        self.comment_layout = QHBoxLayout()
+        self.comment_input = QLineEdit()
+        self.comment_widget.setLayout(self.comment_layout)
+        self.comment_layout.addWidget(QLabel("Comment: "))
+        self.comment_layout.addWidget(self.comment_input)
 
         #tags input
         self.tags_widget = QWidget()
@@ -142,6 +149,7 @@ class AddBookmarkGui(QWidget):
         #add sub-widget to mainwidget (layout)
         self.main_layout.addWidget(self.title_widget)
         self.main_layout.addWidget(self.url_widget)
+        self.main_layout.addWidget(self.comment_widget)
         self.main_layout.addWidget(self.tags_widget)
         self.main_layout.addWidget(self.button_widget)
         self.setWindowModality(Qt.ApplicationModal)  #can't access main window when popup is open

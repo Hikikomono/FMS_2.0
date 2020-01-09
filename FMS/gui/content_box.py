@@ -9,6 +9,7 @@ class ContentBox(QFrame):
         super().__init__()
         self.title = bookmark.title
         self.url = bookmark.url
+        self.comment = bookmark.comment
         self.tags = bookmark.tags   #list
 
         frame_layout = QVBoxLayout()
@@ -17,9 +18,11 @@ class ContentBox(QFrame):
 
         title = QLabel(self.title)
         url = QLabel(self.url)
-        tags = QLabel(''.join(self.tags))  # listen-impl muss noch überdacht werden
+        comment = QLabel(self.comment)
+        tags = QLabel(''.join(self.tags))
 
         frame_layout.addWidget(title)
         frame_layout.addWidget(url)
+        frame_layout.addWidget(comment)
         frame_layout.addWidget(tags)
 

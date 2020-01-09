@@ -56,8 +56,8 @@ class MainView(MainGui):
         """
         self.caretaker.get_list()
         self.parser.get_bookmarks()
-        self.popup = PopupView(self)
-        self.popup.init_content(self.caretaker.bookmark_list)
+        popup = PopupView(self)
+        popup.init_content(self.caretaker.bookmark_list)
 
 
 
@@ -74,7 +74,7 @@ class MainView(MainGui):
                 else:
                     print("Item already in list")
 
-    def add_list_item(self, title: str, url: str, tags: list):
+    def add_list_item(self, title: str, url: str, comment: str, tags: list):
         """
         adds a spacer item, so that added Bookmarks / content_box.py are always at the top of the window
         spacer_queue keeps care that only the most recent added Bookmark / Contentbox has a spacer underneath it
@@ -83,7 +83,7 @@ class MainView(MainGui):
         if self.spacer_queue.__len__() > 0:
             self.scroll_layout.removeItem(self.spacer_queue.pop())
 
-        self.caretaker.add_bookmark(None, title, url, None, None, tags)
+        self.caretaker.add_bookmark(None, title, url, comment, None, tags)
         self.content_box_list.append(ContentBox(self.caretaker.bookmark_list[-1]))
         self.scroll_layout.addWidget(self.content_box_list[-1])
 
@@ -129,7 +129,8 @@ class PopupView(AddBookmarkGui):
         if not(self.title_input.text().__len__() < 2 or self.url_input.text().__len__() < 5):
             tags = self.tags_input.text()
 
-            self.parent.add_list_item(self.title_input.text(), self.url_input.text(), tags.replace(" ", "").split(",")) #tags.split = tagliste
+            self.parent.add_list_item(self.title_input.text(), self.url_input.text(), self.comment_input.text(),
+                                      tags.replace(" ", "").split(",")) #tags.split = tagliste
 
             print(self.tags_input.text().split())
             self.parent.add_tags(tags.replace(" ", "").split(","))
@@ -142,7 +143,6 @@ class PopupView(AddBookmarkGui):
 
     def init_content(self, bookmarks: list):
         for bookmark in bookmarks:
-            print(bookmark.tags)
             self.parent.init_list_item(bookmark)
             self.parent.add_tags(bookmark.tags)
 
