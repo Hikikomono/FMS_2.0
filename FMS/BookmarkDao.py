@@ -41,13 +41,15 @@ class BookmarkDao:
                          (bookmark.title, bookmark.url, bookmark.comment, bookmark.image, bookmark.id))  #
         self.conn.commit()
 
+
+
     def get_list(self) -> [Bookmark]:
         self.cur.execute("SELECT * FROM bookmarks")
         db_list = list(self.cur.fetchall())
         bookmark_list = []
 
         for row in db_list:
-            bookmark_list.append(Bookmark(row[0], row[1], row[2], row[3], row[4]))
+            bookmark_list.append(Bookmark(row[0], row[1], row[2], row[3], row[4], self.get_tag_list(row[0])))
 
         # print(bookmark_list[0])
         return bookmark_list
@@ -57,6 +59,17 @@ class BookmarkDao:
         max_id = self.cur.fetchone()
         return int(max_id[0])
 
+    def get_tag_list(self, bid):
+        self.cur.execute("SELECT tid FROM linkingTable WHERE bid = ?", [bid])
+        tid_list = list(self.cur.fetchall())
+
+        tag_list = []
+        for tid in tid_list:
+            self.cur.execute("SELECT tag_name FROM tags WHERE tid = ?", tid)
+            tag = self.cur.fetchone()
+            print("tagname = " + tag[0])
+            tag_list.append(tag[0])
+        return tag_list
 
 
 # Testing DB entries

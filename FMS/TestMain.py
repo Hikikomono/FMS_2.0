@@ -1,14 +1,19 @@
 """Just for Testing purposes"""
 
-from Caretaker import Caretaker
-from Bookmark import Bookmark
 from DbController import DbController
-from Parser import Parser
-from sys import platform
 from gui.gui_functionality import MainView
+from PyQt5.QtWidgets import *
+import sys
 
 
-gui = MainView()
+db = DbController()
+db.init_tables()
+
+app = QApplication(sys.argv)
+window = MainView()
+window.init_gui()
+window.show()
+app.exec_()
 
 
 

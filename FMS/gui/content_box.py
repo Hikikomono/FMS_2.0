@@ -17,7 +17,7 @@ class ContentBox(QFrame):
 
         title = QLabel(self.title)
         url = QLabel(self.url)
-        tags = QLabel(self.tags)  # listen-impl muss noch überdacht werden
+        tags = QLabel(''.join(self.tags))  # listen-impl muss noch überdacht werden
 
         frame_layout.addWidget(title)
         frame_layout.addWidget(url)

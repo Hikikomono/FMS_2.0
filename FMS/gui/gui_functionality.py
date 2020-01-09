@@ -8,6 +8,9 @@ from gui.gui_raw import MainGui
 from gui.gui_raw import AddBookmarkGui
 from Caretaker import Caretaker
 from Parser import Parser
+from Bookmark import Bookmark
+
+from DbController import DbController #todo remove
 
 
 
@@ -18,6 +21,7 @@ class MainView(MainGui):
 
         self.caretaker = Caretaker()
         self.parser = Parser()
+        self.content_box_list = [] #ContentBox
 
         self.spacer_queue = []
         self.search_bar_content = ""
@@ -50,7 +54,12 @@ class MainView(MainGui):
         """
         calls "add_tags()" and "add_list_item() when program launches to init everything thats in DB"
         """
-        return None
+        self.caretaker.get_list()
+        self.parser.get_bookmarks()
+        self.popup = PopupView(self)
+        self.popup.init_content(self.caretaker.bookmark_list)
+
+
 
     def add_tags(self, tags: list): # TODO add_tags fucntion
         """
@@ -74,13 +83,23 @@ class MainView(MainGui):
         if self.spacer_queue.__len__() > 0:
             self.scroll_layout.removeItem(self.spacer_queue.pop())
 
-        self.scroll_layout.addWidget(ContentBox(title, url, tags))
+        self.caretaker.add_bookmark(None, title, url, None, None, tags)
+        self.content_box_list.append(ContentBox(self.caretaker.bookmark_list[-1]))
+        self.scroll_layout.addWidget(self.content_box_list[-1])
 
         self.spacer_queue.append(QSpacerItem(1, 1, QSizePolicy.Minimum, QSizePolicy.Expanding))
         self.scroll_layout.addSpacerItem(self.spacer_queue[0])
 
-    # def add_list_item_2(self, list_item: content_box.py):
-    #     self.scroll_layout.addWidget(list_item)
+    def init_list_item(self, bookmark: Bookmark):
+        print(self.spacer_queue.__len__())
+        if self.spacer_queue.__len__() > 0:
+            self.scroll_layout.removeItem(self.spacer_queue.pop())
+
+        self.content_box_list.append(ContentBox(bookmark))
+        self.scroll_layout.addWidget(self.content_box_list[-1])
+
+        self.spacer_queue.append(QSpacerItem(1, 1, QSizePolicy.Minimum, QSizePolicy.Expanding))
+        self.scroll_layout.addSpacerItem(self.spacer_queue[0])
 
     def remove_list_item(self, list_item: ContentBox):  #TODO implement functionality
         self.scroll_layout.removeWidget(list_item)
@@ -108,10 +127,12 @@ class PopupView(AddBookmarkGui):
         "add_tags" (gui) method
         """
         if not(self.title_input.text().__len__() < 2 or self.url_input.text().__len__() < 5):
-            self.parent.add_list_item(self.title_input.text(), self.url_input.text(), self.tags_input.text())
+            tags = self.tags_input.text()
+
+            self.parent.add_list_item(self.title_input.text(), self.url_input.text(), tags.replace(" ", "").split(",")) #tags.split = tagliste
 
             print(self.tags_input.text().split())
-            self.parent.add_tags(self.tags_input.text().split(" "))
+            self.parent.add_tags(tags.replace(" ", "").split(","))
 
             print(self.title_input.text() + "\n" +
                   self.url_input.text() + "\n" +
@@ -119,12 +140,20 @@ class PopupView(AddBookmarkGui):
 
         self.close()
 
+    def init_content(self, bookmarks: list):
+        for bookmark in bookmarks:
+            print(bookmark.tags)
+            self.parent.init_list_item(bookmark)
+            self.parent.add_tags(bookmark.tags)
 
 
-app = QApplication(sys.argv)
-# app.setStyleSheet(qdarkgraystyle.load_stylesheet())
-window = MainView()
-window.show()
-app.exec_()
+# db = DbController()
+# db.init_tables()
+#
+# app = QApplication(sys.argv)
+# window = MainView()
+# window.init_gui()
+# window.show()
+# app.exec_()
 
 
