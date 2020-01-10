@@ -52,7 +52,8 @@ class ContentBox(QFrame):
         frame_layout.addWidget(url)
         if self.comment.__len__() > 1:
             frame_layout.addWidget(comment)
-        frame_layout.addWidget(tags)
+        if self.tags.__len__() > 1:  # > 1 weil 1 slot by default vergeben ist
+            frame_layout.addWidget(tags)
 
     def remove_contentbox(self):
         #bookmark aus bookmark_list entfernen & DB entfernen
