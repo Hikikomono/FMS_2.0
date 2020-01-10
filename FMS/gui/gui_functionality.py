@@ -65,7 +65,13 @@ class MainView(MainGui):
             self.scroll_layout.itemAt(0).widget().setParent(None)
 
         for content in filtered_content_box_list:
+            if self.spacer_queue.__len__() > 0:
+                self.scroll_layout.removeItem(self.spacer_queue.pop())
+
             self.scroll_layout.addWidget(content)
+
+            self.spacer_queue.append(QSpacerItem(1, 1, QSizePolicy.Minimum, QSizePolicy.Expanding))
+            self.scroll_layout.addSpacerItem(self.spacer_queue[0])
 
         # clear Layout / show only searched elements
 
