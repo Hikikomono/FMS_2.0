@@ -10,9 +10,7 @@ from Caretaker import Caretaker
 from Parser import Parser
 from Bookmark import Bookmark
 
-from DbController import DbController #todo remove
-
-
+from DbController import DbController  # todo remove
 
 
 class MainView(MainGui):
@@ -21,7 +19,7 @@ class MainView(MainGui):
 
         self.caretaker = Caretaker()
         self.parser = Parser()
-        self.content_box_list = [] #ContentBox
+        self.content_box_list = []  # ContentBox
 
         self.spacer_queue = []
         self.search_bar_content = ""
@@ -31,6 +29,8 @@ class MainView(MainGui):
         self.add_bookmark_key.activated.connect(self.add_bookmark_popup)
         self.add_button.clicked.connect(self.add_bookmark_popup)
         self.tag_list.itemClicked.connect(self.tag_clicked)
+
+        self.search_button.clicked.connect(self.search_bookmark)
 
     def tag_clicked(self, item):
         """
@@ -49,8 +49,27 @@ class MainView(MainGui):
         self.popup.show()
         return None
 
+    def search_bookmark(self):
+        """searches content_box_list bookmarks for their tags and titles to match the input of the searchbar"""
 
-    def init_gui(self): # TODO init_gui function
+        elements = self.search_bar_content.split()
+        filtered_content_box_list = []  # hier kommen gefundene Objekte rein
+        for element in elements:
+            for content in self.content_box_list:
+                if element in content.tags:
+                    filtered_content_box_list.append(content)
+                    print(content.tags)
+
+        # delete layout content
+        while self.scroll_layout.count() > 1:  # >1 weil es nur 8 Objekte sind un kA was das 1 Objekt ist, aber wenn man es löscht gibt es ein Error
+            self.scroll_layout.itemAt(0).widget().setParent(None)
+
+        for content in filtered_content_box_list:
+            self.scroll_layout.addWidget(content)
+
+        # clear Layout / show only searched elements
+
+    def init_gui(self):  # TODO init_gui function
         """
         calls "add_tags()" and "add_list_item() when program launches to init everything thats in DB"
         """
@@ -59,9 +78,7 @@ class MainView(MainGui):
         popup = PopupView(self)
         popup.init_content(self.caretaker.bookmark_list)
 
-
-
-    def add_tags(self, tags: list): # TODO add_tags fucntion
+    def add_tags(self, tags: list):  # TODO add_tags fucntion
         """
         checks if new tags are in the "tags: list" if so, then they are added to "tag_list"
         if they already exist, they are not added
@@ -101,7 +118,7 @@ class MainView(MainGui):
         self.spacer_queue.append(QSpacerItem(1, 1, QSizePolicy.Minimum, QSizePolicy.Expanding))
         self.scroll_layout.addSpacerItem(self.spacer_queue[0])
 
-    def remove_list_item(self, list_item: ContentBox):  #TODO implement functionality
+    def remove_list_item(self, list_item: ContentBox):  # TODO implement functionality
         self.scroll_layout.removeWidget(list_item)
 
 
@@ -110,7 +127,7 @@ class PopupView(AddBookmarkGui):
         super().__init__()
         self.parent = parent
 
-        #event / signals
+        # event / signals
         self.enter_key_add.activated.connect(self.get_input)
         self.esc_key_close.activated.connect(self.close)
 
@@ -126,11 +143,11 @@ class PopupView(AddBookmarkGui):
         splits the tags (seperated with " ") into seperate strings -> returns a list which gets passed to
         "add_tags" (gui) method
         """
-        if not(self.title_input.text().__len__() < 2 or self.url_input.text().__len__() < 5):
+        if not (self.title_input.text().__len__() < 2 or self.url_input.text().__len__() < 5):
             tags = self.tags_input.text()
 
             self.parent.add_list_item(self.title_input.text(), self.url_input.text(), self.comment_input.text(),
-                                      tags.replace(" ", "").split(",")) #tags.split = tagliste
+                                      tags.replace(" ", "").split(","))  # tags.split = tagliste
 
             print(self.tags_input.text().split())
             self.parent.add_tags(tags.replace(" ", "").split(","))
@@ -146,7 +163,6 @@ class PopupView(AddBookmarkGui):
             self.parent.init_list_item(bookmark)
             self.parent.add_tags(bookmark.tags)
 
-
 # db = DbController()
 # db.init_tables()
 #
@@ -155,5 +171,3 @@ class PopupView(AddBookmarkGui):
 # window.init_gui()
 # window.show()
 # app.exec_()
-
-
