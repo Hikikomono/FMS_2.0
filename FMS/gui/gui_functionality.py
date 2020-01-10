@@ -31,6 +31,8 @@ class MainView(MainGui):
         self.sync_button.clicked.connect(self.sync_plugin)
         self.search_button.clicked.connect(self.search_bookmark)
 
+        self.search_button.clicked.connect(self.search_bookmark)
+
     def tag_clicked(self, item):
         """
         when a tag in the "tag_list" (gui) is clicked, this method gets called which inserts the clicked item
@@ -47,6 +49,36 @@ class MainView(MainGui):
         self.popup = PopupView(self)
         self.popup.show()
         return None
+
+    def search_bookmark(self):
+        """searches content_box_list bookmarks for their tags and titles to match the input of the searchbar"""
+        # print(self.search_bar.text())
+        # self.search_bar.setText(self.search_bar_content)
+
+        elements = self.search_bar.text().split()
+        filtered_content_box_list = []  # hier kommen gefundene Objekte rein
+        # print(len(elements))
+
+        # darstellen falls keine suche eingegeben wurde
+        if len(elements) == 0:
+            print("keine elemente")
+            for content in self.content_box_list:
+                content.show()
+
+        else:
+
+            for element in elements:
+                for content in self.content_box_list:
+                    if element in content.tags:
+                        filtered_content_box_list.append(content)
+                        # print(content.tags)
+
+            # delete layout content
+            for content in self.content_box_list:
+                content.close()
+
+            for content in filtered_content_box_list:
+                content.show()
 
     def sync_plugin(self):
         #Todo: implement add. checks
