@@ -517,4 +517,13 @@ QAbstractSpinBox {
     min-width: 50px;
 }
 
+QPushButton[objectName^="remove_button"] {
+ background-color: none;
+ border-style: none;
+ font-size: 10px;
+}
 
+QPushButton:hover[objectName^="remove_button"]{
+    color: red;
+    border-style: solid;
+}

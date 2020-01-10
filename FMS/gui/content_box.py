@@ -12,6 +12,11 @@ class ContentBox(QFrame):
         self.comment = bookmark.comment
         self.tags = bookmark.tags   #list
 
+        self.remove_button = QPushButton("x")
+        self.remove_button.setFixedSize(10,20)
+        self.remove_button.setObjectName("remove_button")
+        self.remove_button.clicked.connect(self.remove_contentbox)
+
         link_markup = f'<a href="{self.url}"><span style="color:green;">{self.url}</span></a>'
 
         frame_layout = QVBoxLayout()
@@ -24,9 +29,20 @@ class ContentBox(QFrame):
         comment = QLabel("Comment: " + self.comment)
         tags = QLabel("Tags: " +''.join(self.tags))
 
-        frame_layout.addWidget(title)
+        self.remove_widget = QWidget()
+        self.remove_layout = QHBoxLayout()
+        self.remove_layout.setContentsMargins(0,0,0,0)
+        self.remove_widget.setLayout(self.remove_layout)
+        self.remove_layout.addWidget(title)
+        self.remove_layout.addWidget(self.remove_button)
+
+        frame_layout.addWidget(self.remove_widget)
         frame_layout.addWidget(url)
         if self.comment.__len__() > 1:
             frame_layout.addWidget(comment)
         frame_layout.addWidget(tags)
+
+    def remove_contentbox(self):
+        self.close()
+
 
