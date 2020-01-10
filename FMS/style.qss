@@ -21,7 +21,7 @@ QTreeView, QListView
 
 QWidget:item:hover
 {
-    background-color: QLinearGradient( x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #ffa02f, stop: 1 #ca0619);
+    background-color: QLinearGradient( x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #2fb6ff, stop: 1 #442fff);
     color: #000000;
 }
 

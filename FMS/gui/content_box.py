@@ -12,12 +12,15 @@ class ContentBox(QFrame):
         self.comment = bookmark.comment
         self.tags = bookmark.tags   #list
 
+        link_markup = f'<a href="{self.url}"><span style="color:green;">{self.url}</span></a>'
+
         frame_layout = QVBoxLayout()
         self.setLayout(frame_layout)
         self.setFrameShape(QFrame.Box)
 
         title = QLabel(self.title)
-        url = QLabel(self.url)
+        url = QLabel(link_markup)
+        url.setOpenExternalLinks(True)
         comment = QLabel(self.comment)
         tags = QLabel(''.join(self.tags))
 
