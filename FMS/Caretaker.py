@@ -27,7 +27,7 @@ class Caretaker:
         #self.parser = Parser()
         # make a singleton here (dao + parser)
 
-    def add_bookmark(self, id: int = None, title: str = None, url: str = None, comment: str = None, image=None,
+    def add_bookmark(self, id: int = None, title: str = None, url: str = None, comment: str = "", image=None,
                      tags: list = None):
         """this method is called to create a new bookmark locally, and send it directly to the db via DAO"""
         self.bookmark_list.append(Bookmark(id, title, url, comment, image, tags))

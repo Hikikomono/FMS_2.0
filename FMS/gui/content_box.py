@@ -18,14 +18,15 @@ class ContentBox(QFrame):
         self.setLayout(frame_layout)
         self.setFrameShape(QFrame.Box)
 
-        title = QLabel(self.title)
-        url = QLabel(link_markup)
+        title = QLabel("Title: " + self.title)
+        url = QLabel("URL: " + link_markup)
         url.setOpenExternalLinks(True)
-        comment = QLabel(self.comment)
-        tags = QLabel(''.join(self.tags))
+        comment = QLabel("Comment: " + self.comment)
+        tags = QLabel("Tags: " +''.join(self.tags))
 
         frame_layout.addWidget(title)
         frame_layout.addWidget(url)
-        frame_layout.addWidget(comment)
+        if self.comment.__len__() > 1:
+            frame_layout.addWidget(comment)
         frame_layout.addWidget(tags)
 

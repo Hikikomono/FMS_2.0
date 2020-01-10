@@ -14,7 +14,7 @@
 
 class Bookmark:
     # do we need a placeholder for default image import? empty picture?
-    def __init__(self, id: int = None, title: str = None, url: str = None, comment: str = None, image=None,
+    def __init__(self, id: int = None, title: str = None, url: str = "None", comment: str = "", image=None,
                  tags: list = None):
         """contstructor for Bookmark with ID for creation from DB"""
         self.title = title
