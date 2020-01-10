@@ -3,10 +3,22 @@ from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
 from PyQt5.QtCore import *
 from Bookmark import Bookmark
+from Caretaker import Caretaker
 
 class ContentBox(QFrame):
-    def __init__(self, bookmark: Bookmark):
+    def __init__(self, bookmark: Bookmark, content_box_list: list, caretaker: Caretaker):
         super().__init__()
+
+        #todo remove id prints------
+        self.bookmark = bookmark
+        self.caretaker = caretaker
+        self.content_box_list = content_box_list
+        print(id(bookmark))
+        print(id(self.bookmark))
+        print(id(caretaker))
+        print(id(self.caretaker))
+        ##todo remove id prints------
+
         self.title = bookmark.title
         self.url = bookmark.url
         self.comment = bookmark.comment
@@ -43,6 +55,10 @@ class ContentBox(QFrame):
         frame_layout.addWidget(tags)
 
     def remove_contentbox(self):
+        #bookmark aus bookmark_list entfernen & DB entfernen
+        self.caretaker.delete_bookmark(self.bookmark)
+        #contentbox aus content_box_list entfernen
+        self.content_box_list.remove(self)
         self.close()
 
 

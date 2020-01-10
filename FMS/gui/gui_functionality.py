@@ -10,7 +10,6 @@ from Caretaker import Caretaker
 from Parser import Parser
 from Bookmark import Bookmark
 
-from DbController import DbController  # todo remove
 
 
 class MainView(MainGui):
@@ -75,7 +74,7 @@ class MainView(MainGui):
 
         # clear Layout / show only searched elements
 
-    def init_gui(self):  # TODO init_gui function
+    def init_gui(self):
         """
         calls "add_tags()" and "add_list_item() when program launches to init everything thats in DB"
         """
@@ -84,7 +83,7 @@ class MainView(MainGui):
         popup = PopupView(self)
         popup.init_content(self.caretaker.bookmark_list)
 
-    def add_tags(self, tags: list):  # TODO add_tags fucntion
+    def add_tags(self, tags: list):
         """
         checks if new tags are in the "tags: list" if so, then they are added to "tag_list"
         if they already exist, they are not added
@@ -107,7 +106,7 @@ class MainView(MainGui):
             self.scroll_layout.removeItem(self.spacer_queue.pop())
 
         self.caretaker.add_bookmark(None, title, url, comment, None, tags)
-        self.content_box_list.append(ContentBox(self.caretaker.bookmark_list[-1]))
+        self.content_box_list.append(ContentBox(self.caretaker.bookmark_list[-1], self.content_box_list, self.caretaker))
         self.scroll_layout.addWidget(self.content_box_list[-1])
 
         self.spacer_queue.append(QSpacerItem(1, 1, QSizePolicy.Minimum, QSizePolicy.Expanding))
@@ -118,14 +117,12 @@ class MainView(MainGui):
         if self.spacer_queue.__len__() > 0:
             self.scroll_layout.removeItem(self.spacer_queue.pop())
 
-        self.content_box_list.append(ContentBox(bookmark))
+        self.content_box_list.append(ContentBox(bookmark, self.content_box_list, self.caretaker))
         self.scroll_layout.addWidget(self.content_box_list[-1])
 
         self.spacer_queue.append(QSpacerItem(1, 1, QSizePolicy.Minimum, QSizePolicy.Expanding))
         self.scroll_layout.addSpacerItem(self.spacer_queue[0])
 
-    def remove_list_item(self, list_item: ContentBox):  # TODO implement functionality
-        self.scroll_layout.removeWidget(list_item)
 
 
 class PopupView(AddBookmarkGui):

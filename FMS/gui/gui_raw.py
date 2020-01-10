@@ -7,7 +7,6 @@ from PyQt5.QtCore import *
 class MainGui(QWidget):
     def __init__(self):
         super().__init__()
-        #todo remove stylesheet position (read)
 
         sshFile = "style.qss"
         with open(sshFile, "r") as fh:
@@ -76,14 +75,11 @@ class MainGui(QWidget):
 
         self.scroll.setWidget(self.scroll_content)
 
-        #todo test section #remove
-
 
 class AddBookmarkGui(QWidget):
     def __init__(self):
         super().__init__()
 
-        #todo remove
         sshFile = "style.qss"
         with open(sshFile, "r") as fh:
              self.setStyleSheet(fh.read())
