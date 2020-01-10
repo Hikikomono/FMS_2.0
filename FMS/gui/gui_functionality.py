@@ -28,7 +28,7 @@ class MainView(MainGui):
         self.add_bookmark_key.activated.connect(self.add_bookmark_popup)
         self.add_button.clicked.connect(self.add_bookmark_popup)
         self.tag_list.itemClicked.connect(self.tag_clicked)
-
+        self.sync_button.clicked.connect(self.sync_plugin)
         self.search_button.clicked.connect(self.search_bookmark)
 
     def tag_clicked(self, item):
@@ -47,6 +47,10 @@ class MainView(MainGui):
         self.popup = PopupView(self)
         self.popup.show()
         return None
+
+    def sync_plugin(self):
+        #Todo: implement add. checks
+        self.parser.get_bookmarks()
 
     def search_bookmark(self):
         """searches content_box_list bookmarks for their tags and titles to match the input of the searchbar"""
