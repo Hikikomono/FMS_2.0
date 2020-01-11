@@ -37,7 +37,7 @@ class Parser:
                     print("folgende Bookmarks wurden aus dem csv in Bookmark Objekte verwandelt:")
                     for row in csv_reader:
                         # print(f'blabla {attribute} blabla') makes a formatted string
-                        self.carer.add_bookmark(None, row[1], row[0], row[3], None, row[2].replace(" ", "").split())
+                        self.carer.add_bookmark(None, row[1], row[0], row[3], None, row[2].replace(" ", "").split(","))
                         print(f'\t{row[0]} <-URL {row[1]} <-Title {row[2]} <-tags {row[3]} <-comment')
                         line_count += 1
                     print(f'Processed {line_count} lines.')
@@ -53,7 +53,7 @@ class Parser:
                     print("folgende Bookmarks wurden aus dem csv in Bookmark Objekte verwandelt:")
                     for row in csv_reader:
                         # print(f'blabla {attribute} blabla') makes a formatted string
-                        self.carer.add_bookmark(None, row[1], row[0], row[3], None, row[2].replace(" ", "").split())
+                        self.carer.add_bookmark(None, row[1], row[0], row[3], None, row[2].replace(" ", "").split(","))
                         print(f'\t{row[0]} <-URL {row[1]} <-Title {row[2]} <-tags {row[3]} <-comment')
                         line_count += 1
                     print(f'Processed {line_count} lines.')

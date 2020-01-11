@@ -54,10 +54,13 @@ function displayInfo(message){
 
 function addToArray() {
     //function adds inserted Data to an array that can be converted to .csv later
+    let tag = "";
+    let comment = "";
+
     let url = document.getElementById("inputUrl").value;
     let title = document.getElementById("inputTitle").value;
-    let tag = document.getElementById("inputTag").value;
-    let comment = document.getElementById("inputComment").value;
+    tag = document.getElementById("inputTag").value;
+    comment = document.getElementById("inputComment").value;
 
     bookmarkArray.push([url,title,tag,comment]);
 
