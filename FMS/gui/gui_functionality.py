@@ -82,7 +82,26 @@ class MainView(MainGui):
 
     def sync_plugin(self):
         #Todo: implement add. checks
+
+        old_count = self.caretaker.bookmark_list.__len__()
         self.parser.get_bookmarks()
+        self.caretaker.get_list()
+        new_count = self.caretaker.bookmark_list.__len__()
+        print("old: " + str(old_count) + "| new: " + str(new_count))
+
+        for i in range(old_count, new_count):
+            #Contenbox erstellen
+            self.content_box_list.append(ContentBox(self.caretaker.bookmark_list[i], self.content_box_list, self.caretaker))
+            print(Bookmark(self.content_box_list[-1].bookmark.title))
+            #contentbox zu content_box_list adden
+            self.scroll_layout.addWidget(self.content_box_list[-1])
+
+        # delete layout content
+        for content in self.content_box_list:
+            content.close()
+
+        for content in self.content_box_list:
+            content.show()
 
     def init_gui(self):
         """
@@ -91,6 +110,7 @@ class MainView(MainGui):
         self.caretaker.get_list()
         self.parser.get_bookmarks()
         popup = PopupView(self)
+        self.caretaker.get_list()
         popup.init_content(self.caretaker.bookmark_list)
 
     def add_tags(self, tags: list):
