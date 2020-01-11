@@ -30,9 +30,8 @@ class MainGui(QWidget):
         self.searchbar_content = ""
         #self.search_bar.placeholderText("pyqt python (separate tags with Spaces)") #TODO how to "placeholder text"?
 
-        self.search_button = QPushButton() #TODO lupen icon einfügen
-        self.search_button.setIcon(QIcon(QPixmap("magnifying-glass-icon.png")))
-        self.search_button.setFixedWidth(40)
+        self.search_button = QPushButton("\U0001F50D") #TODO lupen icon einfügen
+        self.search_button.setFixedWidth(10)
         self.search_button.setFocusPolicy(Qt.NoFocus)
 
         self.add_button = QPushButton("+")
