@@ -9,15 +9,9 @@ class ContentBox(QFrame):
     def __init__(self, bookmark: Bookmark, content_box_list: list, caretaker: Caretaker):
         super().__init__()
 
-        #todo remove id prints------
         self.bookmark = bookmark
         self.caretaker = caretaker
         self.content_box_list = content_box_list
-        print(id(bookmark))
-        print(id(self.bookmark))
-        print(id(caretaker))
-        print(id(self.caretaker))
-        ##todo remove id prints------
 
         self.title = bookmark.title
         self.url = bookmark.url
