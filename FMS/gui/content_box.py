@@ -51,7 +51,7 @@ class ContentBox(QFrame):
         frame_layout.addWidget(url)
         if self.comment.__len__() > 1:
             frame_layout.addWidget(comment)
-        if not(self.tags.__contains__("")):  # TODO falls tags updated werden können -> problem
+        if not(self.tags.__contains__("")):  #falls tags updated werden können -> problem
             frame_layout.addWidget(tags)
 
     def remove_contentbox(self):

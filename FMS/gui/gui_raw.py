@@ -1,4 +1,3 @@
-import sys
 from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
 from PyQt5.QtCore import *
@@ -14,10 +13,10 @@ class MainGui(QWidget):
 
         self.win_layout = QVBoxLayout()
         self.setLayout(self.win_layout)
-        self.setWindowIcon(QIcon("search_icon.png"))
+        self.setWindowIcon(QIcon("magnifying-glass-icon.png"))
 
         # main windows (app) settings
-        self.setGeometry(650, 400, 700, 400)  # ersten 2 coordinaten geben relative position des windows am bildschirm an
+        self.setGeometry(550, 350, 800, 600)  # ersten 2 coordinaten geben relative position des windows am bildschirm an
         self.setWindowTitle("Find My Stuff")
         self.win_layout.setContentsMargins(0, 0, 0, 0)
 
@@ -28,9 +27,8 @@ class MainGui(QWidget):
 
         self.search_bar = QLineEdit(self)
         self.searchbar_content = ""
-        #self.search_bar.placeholderText("pyqt python (separate tags with Spaces)") #TODO how to "placeholder text"?
 
-        self.search_button = QPushButton("\U0001F50D") #TODO lupen icon einfügen
+        self.search_button = QPushButton("\U0001F50D")
         self.search_button.setFixedWidth(10)
         self.search_button.setFocusPolicy(Qt.NoFocus)
 
@@ -60,14 +58,16 @@ class MainGui(QWidget):
 
         # list (view for tags)
         self.tag_list = QListWidget()
-
-        self.tag_list.setMaximumWidth(80)
+        self.tag_list.resize
+        self.tag_list.setMaximumWidth(150)
         self.content_layout.addWidget(self.tag_list)
 
         # scroll_area (main view for bookmarks)
         self.scroll = QScrollArea(self)
         self.scroll.setWidgetResizable(True)
+        self.scroll.setMinimumSize(300, 0)
         self.content_layout.addWidget(self.scroll)
+
 
         self.scroll_content = QWidget()
         self.scroll_layout = QVBoxLayout(self.scroll_content)
@@ -87,7 +87,7 @@ class AddBookmarkGui(QWidget):
         self.main_layout = QVBoxLayout(self)
         self.setLayout(self.main_layout)
         self.setWindowIcon(QIcon("search_icon.png"))
-        self.setGeometry(850,500, 300,300)
+        self.setGeometry(700,500, 500,300)
         self.setWindowTitle("Add new Bookmark")
         self.setContentsMargins(0,0,0,0)
         self.setMaximumHeight(150)

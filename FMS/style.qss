@@ -21,13 +21,15 @@ QTreeView, QListView
 
 QWidget:item:hover
 {
-    background-color: QLinearGradient( x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #2fb6ff, stop: 1 #442fff);
-    color: #000000;
+
+    /* background-color: QLinearGradient( x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #2fb6ff, stop: 1 #442fff); */
+    color: green;
+    font-size: large;
 }
 
 QWidget:item:selected
 {
-    background-color: QLinearGradient( x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #ffa02f, stop: 1 #d7801a);
+    /* background-color: QLinearGradient( x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #ffa02f, stop: 1 #d7801a); */
 }
 
 QMenuBar::item
@@ -128,7 +130,8 @@ QComboBox
 
 QComboBox:hover,QPushButton:hover
 {
-    border: 2px solid QLinearGradient( x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #ffa02f, stop: 1 #d7801a);
+    border: 2px solid green;
+   /* border: 2px solid QLinearGradient( x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #ffa02f, stop: 1 #d7801a); */
 }
 
 
@@ -527,3 +530,4 @@ QPushButton:hover[objectName^="remove_button"]{
     color: red;
     border-style: solid;
 }
+

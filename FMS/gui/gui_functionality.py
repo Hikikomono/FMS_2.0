@@ -10,6 +10,10 @@ from Caretaker import Caretaker
 from Parser import Parser
 from Bookmark import Bookmark
 
+import requests
+from bs4 import BeautifulSoup
+
+
 
 
 class MainView(MainGui):
@@ -43,7 +47,6 @@ class MainView(MainGui):
 
         self.search_bar_content = self.search_bar_content + " " + QListWidgetItem(item).text()
         self.search_bar.setText(self.search_bar_content)
-        print(QListWidgetItem(item).text())  # prints the content of the list item TODO remove
 
     def add_bookmark_popup(self):
         self.popup = PopupView(self)
@@ -81,8 +84,6 @@ class MainView(MainGui):
                 content.show()
 
     def sync_plugin(self):
-        #Todo: implement add. checks
-
         old_count = self.caretaker.bookmark_list.__len__()
         self.parser.get_bookmarks()
         self.caretaker.get_list()
@@ -94,7 +95,14 @@ class MainView(MainGui):
             self.content_box_list.append(ContentBox(self.caretaker.bookmark_list[i], self.content_box_list, self.caretaker))
             print(Bookmark(self.content_box_list[-1].bookmark.title))
             #contentbox zu content_box_list adden
+
+            if self.spacer_queue.__len__() > 0:
+                self.scroll_layout.removeItem(self.spacer_queue.pop())
+
             self.scroll_layout.addWidget(self.content_box_list[-1])
+
+            self.spacer_queue.append(QSpacerItem(1, 1, QSizePolicy.Minimum, QSizePolicy.Expanding))
+            self.scroll_layout.addSpacerItem(self.spacer_queue[0])
 
         # delete layout content
         for content in self.content_box_list:
@@ -122,16 +130,12 @@ class MainView(MainGui):
             for i in range(tags.__len__()):
                 if self.tag_list.findItems(tags[i], Qt.MatchExactly).__len__() == 0:
                     self.tag_list.addItem(tags[i])
-                    print("Item is New")
-                else:
-                    print("Item already in list")
 
     def add_list_item(self, title: str, url: str, comment: str, tags: list):
         """
         adds a spacer item, so that added Bookmarks / content_box.py are always at the top of the window
         spacer_queue keeps care that only the most recent added Bookmark / Contentbox has a spacer underneath it
         """
-        print(self.spacer_queue.__len__())
         if self.spacer_queue.__len__() > 0:
             self.scroll_layout.removeItem(self.spacer_queue.pop())
 
@@ -143,7 +147,6 @@ class MainView(MainGui):
         self.scroll_layout.addSpacerItem(self.spacer_queue[0])
 
     def init_list_item(self, bookmark: Bookmark):
-        print(self.spacer_queue.__len__())
         if self.spacer_queue.__len__() > 0:
             self.scroll_layout.removeItem(self.spacer_queue.pop())
 
@@ -166,6 +169,7 @@ class PopupView(AddBookmarkGui):
 
         self.add_button.clicked.connect(self.get_input)
         self.cancel_button.clicked.connect(self.close)
+        self.url_input.textChanged.connect(self.add_url_title)
 
     def get_input(self):
         """
@@ -195,6 +199,26 @@ class PopupView(AddBookmarkGui):
         for bookmark in bookmarks:
             self.parent.init_list_item(bookmark)
             self.parent.add_tags(bookmark.tags)
+
+    def add_url_title(self):
+        if self.title_input.text().__len__() == 0 and self.url_input.text().__contains__("http"):
+            url_tile = self.get_url_title(self.url_input.text())
+            self.title_input.setText(url_tile)
+
+
+    def get_url_title(self, url: str):
+        # issue http request to create request object
+        try:
+            http_request = requests.get(url)
+            # extract the text out of the request object
+            http_text = http_request.text
+            # create BeautifulSoup object with content of the website and define a parser
+            soup = BeautifulSoup(http_text, "html.parser")
+            # extract the _title_ of the webpage & print it
+            article_title = soup.title.string
+            return article_title
+        except: #eine Übergangslösung weil .. =)
+            None
 
 # db = DbController()
 # db.init_tables()

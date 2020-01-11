@@ -67,7 +67,6 @@ class BookmarkDao:
         for tid in tid_list:
             self.cur.execute("SELECT tag_name FROM tags WHERE tid = ?", tid)
             tag = self.cur.fetchone()
-            print("tagname = " + tag[0])
             tag_list.append(tag[0])
         return tag_list
 

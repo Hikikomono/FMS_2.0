@@ -33,7 +33,6 @@ saveBtn.addEventListener("click", addToArray);
 //syncbutton function (getting a csv out of the array)
 syncBtn.addEventListener("click", getCSV);
 
-//TODO: this needs to be coded to activate when chrome is closed, together with a final save to CSV
 //for dev purpose only
 let removeBtn = document.getElementById("remove");
 removeBtn.addEventListener("click", removeData);
