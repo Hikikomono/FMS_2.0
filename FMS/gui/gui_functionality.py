@@ -28,6 +28,9 @@ class MainView(MainGui):
         self.search_bar_content = ""
 
         self.add_bookmark_key = QShortcut(QKeySequence("Ctrl+N"), self)
+        self.enter_key_add = QShortcut(QKeySequence(Qt.Key_Return), self.search_bar)
+
+        self.enter_key_add.activated.connect(self.search_bookmark)
 
         self.add_bookmark_key.activated.connect(self.add_bookmark_popup)
         self.add_button.clicked.connect(self.add_bookmark_popup)
@@ -163,6 +166,10 @@ class PopupView(AddBookmarkGui):
         super().__init__()
         self.parent = parent
 
+
+        #keyboard shortcuts to close popup / add bookmark
+        self.enter_key_add = QShortcut(QKeySequence(Qt.Key_Return), self)
+        self.esc_key_close = QShortcut(QKeySequence(Qt.Key_Escape), self)
         # event / signals
         self.enter_key_add.activated.connect(self.get_input)
         self.esc_key_close.activated.connect(self.close)
@@ -220,11 +227,3 @@ class PopupView(AddBookmarkGui):
         except: #eine Übergangslösung weil .. =)
             None
 
-# db = DbController()
-# db.init_tables()
-#
-# app = QApplication(sys.argv)
-# window = MainView()
-# window.init_gui()
-# window.show()
-# app.exec_()

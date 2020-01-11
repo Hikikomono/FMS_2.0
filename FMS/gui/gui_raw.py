@@ -92,11 +92,6 @@ class AddBookmarkGui(QWidget):
         self.setContentsMargins(0,0,0,0)
         self.setMaximumHeight(150)
 
-        #keyboard shortcuts to close popup / add bookmark
-        self.enter_key_add = QShortcut(QKeySequence(Qt.Key_Return), self)
-        self.esc_key_close = QShortcut(QKeySequence(Qt.Key_Escape), self)
-
-
         #title input
         self.title_widget = QWidget(self)
         self.title_layout = QHBoxLayout(self)
