@@ -44,7 +44,9 @@ on the left side you can see all the tags that are deployed to your bookmarks.
 you can click on them to put them into the search bar.
 To search for a tag, you need to press the magnifying-glass icon.
 if there is no tag in the search bar, it will reset your bookmark content.
-The + button lets you add your own Bookmark - for example a filesystem URL.
+The + button lets you add your own Bookmark (cool gimmick,
+ if you copy paste a URL from web into it, it will crawl for a title)
+- here you could also put in filesystem URLs!!!!
 The Sync button lets you sync in a CSV file from the Downloads folder - 
 this comes in handy when having the program running and using the 
 Browserplugin in parallel.
