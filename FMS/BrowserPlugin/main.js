@@ -73,9 +73,9 @@ function addToArray() {
         displayInfo("...bookmark added")
     });
 
-    document.getElementById("inputTitle").value = "";
-    document.getElementById("inputTag").value = "";
-    document.getElementById("inputComment").value = "";
+    document.getElementById("inputTitle").value = " ";
+    document.getElementById("inputTag").value = " ";
+    document.getElementById("inputComment").value = " ";
 
 
     //window.alert("saved Bookmark");
