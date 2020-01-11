@@ -84,32 +84,6 @@ class MainView(MainGui):
         #Todo: implement add. checks
         self.parser.get_bookmarks()
 
-    def search_bookmark(self):
-        """searches content_box_list bookmarks for their tags and titles to match the input of the searchbar"""
-
-        elements = self.search_bar_content.split()
-        filtered_content_box_list = []  # hier kommen gefundene Objekte rein
-        for element in elements:
-            for content in self.content_box_list:
-                if element in content.tags:
-                    filtered_content_box_list.append(content)
-                    print(content.tags)
-
-        # delete layout content
-        while self.scroll_layout.count() > 1:  # >1 weil es nur 8 Objekte sind un kA was das 1 Objekt ist, aber wenn man es löscht gibt es ein Error
-            self.scroll_layout.itemAt(0).widget().setParent(None)
-
-        for content in filtered_content_box_list:
-            if self.spacer_queue.__len__() > 0:
-                self.scroll_layout.removeItem(self.spacer_queue.pop())
-
-            self.scroll_layout.addWidget(content)
-
-            self.spacer_queue.append(QSpacerItem(1, 1, QSizePolicy.Minimum, QSizePolicy.Expanding))
-            self.scroll_layout.addSpacerItem(self.spacer_queue[0])
-
-        # clear Layout / show only searched elements
-
     def init_gui(self):
         """
         calls "add_tags()" and "add_list_item() when program launches to init everything thats in DB"
