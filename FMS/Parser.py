@@ -37,9 +37,12 @@ class Parser:
                     print("folgende Bookmarks wurden aus dem csv in Bookmark Objekte verwandelt:")
                     for row in csv_reader:
                         # print(f'blabla {attribute} blabla') makes a formatted string
-                        self.carer.add_bookmark(None, row[1], row[0], row[3], None, row[2].replace(" ", "").split(","))
-                        print(f'\t{row[0]} <-URL {row[1]} <-Title {row[2]} <-tags {row[3]} <-comment')
-                        line_count += 1
+                        try:
+                            self.carer.add_bookmark(None, row[1], row[0], row[3], None, row[2].replace(" ", "").split(","))
+                            print(f'\t{row[0]} <-URL {row[1]} <-Title {row[2]} <-tags {row[3]} <-comment')
+                            line_count += 1
+                        except:
+                            print("CSV syntax error. File not imported - but deleted =)")
                     print(f'Processed {line_count} lines.')
                     csv_file.close()
                     os.remove(linuxpath)
