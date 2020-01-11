@@ -39,7 +39,12 @@ class ContentBox(QFrame):
         url = QLabel("URL: " + link_markup)
         url.setOpenExternalLinks(True)
         comment = QLabel("Comment: " + self.comment)
-        tags = QLabel("Tags: " +''.join(self.tags))
+
+        tags_string = "Tags: "
+        for tag in self.tags:
+            tags_string = tags_string + " " + tag
+
+        tags = QLabel(tags_string)
 
         self.remove_widget = QWidget()
         self.remove_layout = QHBoxLayout()
@@ -52,7 +57,7 @@ class ContentBox(QFrame):
         frame_layout.addWidget(url)
         if self.comment.__len__() > 1:
             frame_layout.addWidget(comment)
-        if self.tags.__len__() > 0:  # > 1 weil 1 slot by default vergeben ist
+        if not(self.tags.__contains__("")):  # TODO falls tags updated werden können -> problem
             frame_layout.addWidget(tags)
 
     def remove_contentbox(self):
