@@ -1,7 +1,9 @@
--Softwareprojekt "Find my Stuff" or better "Find my Sh*t" --
+--Softwareprojekt "Find my Stuff" or better "Find my Sh*t" --
 --Authoren: Enko Roberto, Felber Christoph
 --CSDC FH Campus Wien
 --Projekt für Software Engineering
+
+Unsere SRS Documente, HLD, Diaries etc findet man in unserem Google drive (Link auf Moodle.)
 
 --MOSCOW:
 Muss-Kriterien
