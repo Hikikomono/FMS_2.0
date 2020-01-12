@@ -3,6 +3,8 @@
 --CSDC FH Campus Wien
 --Projekt für Software Engineering
 
+Unsere SRS Documente, HLD, Diaries etc findet man in unserem Google drive (Link auf Moodle.)
+
 --MOSCOW:
 Muss-Kriterien
 Erstellen neuer Bookmarks in der Browserapp:
