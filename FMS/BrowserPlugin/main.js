@@ -11,9 +11,15 @@ chrome.storage.sync.get(['array'], function (result) {
 let urlfield = document.getElementById("inputUrl");
 chrome.tabs.query({'active': true, 'lastFocusedWindow': true}, function (tabs) {
 
-    var url = tabs[0].url.slice(0, tabs[0].url.indexOf("#"));
+    var url = "something went wrong";
+    var temp = tabs[0].url.indexOf("#");
+    if(temp!=-1){
 
-    urlfield.value = url;
+        url = tabs[0].url.slice(0, temp);
+    }else{
+    url = tabs[0].url;
+
+    urlfield.value = url;}
 });
 
 let titlefield = document.getElementById("inputTitle");
