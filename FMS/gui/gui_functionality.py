@@ -131,7 +131,7 @@ class MainView(MainGui):
         """
         if tags.__len__() > 0:
             for i in range(tags.__len__()):
-                if self.tag_list.findItems(tags[i], Qt.MatchExactly).__len__() == 0 and tags[i] != " ":
+                if self.tag_list.findItems(tags[i], Qt.MatchExactly).__len__() == 0:
                     self.tag_list.addItem(tags[i])
 
     def add_list_item(self, title: str, url: str, comment: str, tags: list):
