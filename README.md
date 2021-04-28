@@ -3,6 +3,16 @@
 --CSDC FH Campus Wien
 --Projekt für Software Engineering
 
+FMS ist eine in GUI (PyQt) Anwendung die das abspeichern von Bookmarks (URLs, Lokale Pfade) ermöglicht.
+Für URLs gibt es hierfürg ein Chrome Plugin mit dem Bookmarks / URLs aus dem Browser importiert werden können.
+Zu jedem Bookmark können beliebig viele Tags gespeichert werden.
+Die Suche von Bookmarks wird über Tags ermöglicht.
+Bei klick auf ein Bookmark wird das Ziel in der jeweiligen Standardanwendung geöffnet. (Fotos, URLs, Word Dokument, ..)
+
+
+
+----------------------------------------------------------------------------------------------------
+
 Unsere SRS Documente, HLD, Diaries etc findet man in unserem Google drive (Link auf Moodle.)
 
 --MOSCOW:
